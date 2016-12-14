@@ -1,6 +1,9 @@
 # react-redux-linked-prices
 
-Simple example with next features
+Simple example with next features:
+1. Item
+2. Item
+
 1. onClick event handling to update the state (Unlink button)
 2. onSubmit event handing to update the state
 3. Filtering to show only linked room prices in the table (roomprice.linkedPriceId>0)
