@@ -1,8 +1,6 @@
 # react-redux-linked-prices
 
 Simple example with next features:
-1. Item
-2. Item
 
 1. onClick event handling to update the state (Unlink button)
 2. onSubmit event handing to update the state
@@ -10,6 +8,7 @@ Simple example with next features:
 4. Filtering to show only allowed room prices in the dropdowns
 
 You could use the example to understand
+
 1. React-redux
 2. Redux-forms
 3. ES6 arrow function
