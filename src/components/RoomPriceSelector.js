@@ -4,33 +4,38 @@ import { Field } from 'redux-form'
 
 const LINKABLES="linkables"
 const PARENTS="parents"
-function isNotLinked (roomprice){  
-  return roomprice.linkPriceId == 0
-}
-function isNotParent (roomprice){  
-  return true;
+function isNotLinked (rp){  
+  return rp.linkPriceId == 0
 }
 
 
-const RoomPriceSelector = ( {content, roomprices, parents, onSelect} ) => {	
+const RoomPriceSelector = ( {content, roomprices, parents, selectedLinkable} ) => {	
 	if (content == LINKABLES){
-          roomprices = roomprices.filter(isNotLinked).filter(roomprice => {
-			  return !parents.has(roomprice.id);
+          roomprices = roomprices.filter(isNotLinked).filter(rp => {
+          	  // Filter is not a parent
+			  return !parents.has(rp.id);
 		  })
 
     }
     if (content == PARENTS){
-          roomprices = roomprices.filter(isNotLinked)
+          roomprices = roomprices.filter(isNotLinked).filter(rp => {
+			  // Filter the selected linkable
+			  return !(rp.id==selectedLinkable)
+		  })
     }
 	return (
 		<Field name={content} component="select">
         	<option>Select...</option>
-        {roomprices.map(r => (
-          	<RoomPriceOption roomprice={r} key={r.id} />          
+        {roomprices.map(rp => (
+          	<RoomPriceOption roomprice={rp} key={rp.id} />          
           ))}         
       </Field>  	
 	)
 }
 
 export default RoomPriceSelector
+
+
+
+
 

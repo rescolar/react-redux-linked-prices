@@ -1,19 +1,19 @@
-import {  NEWLINK, UNLINK } from './actionTypes'
+import {  NEW_LINK, UNLINK, ON_SELECT_LINKABLE } from './actionTypes'
 
 const uid = () => Math.random().toString(34).slice(2);
 
 
-export const unlink = (id) => {
+export const unLink = (id) => {
   return {
     type: UNLINK,
     payload: id
   }
 }
 
-export const newlink = (form) => {
+export const newLink = (form) => {
   console.log('submitForm Action>',form);
   return {
-    type: NEWLINK,
+    type: NEW_LINK,
     payload: {      
       linkedRoomPriceId: form.linkables,
       parentRoomPriceId: form.parents,
@@ -23,5 +23,10 @@ export const newlink = (form) => {
   }
 }
 
-
+export const onSelectLinkable = (id) => {
+  return {
+    type: ON_SELECT_LINKABLE,
+    payload: id
+  }
+}
 

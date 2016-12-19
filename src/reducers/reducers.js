@@ -1,7 +1,25 @@
-import { NEWLINK, UNLINK } from '../actions/actionTypes'
+import { NEW_LINK, UNLINK, ON_SELECT_LINKABLE } from '../actions/actionTypes'
 import {reducer as formReducer} from 'redux-form'
 import cloneDeep from 'lodash/cloneDeep'
 
+
+const lrs = [
+  {
+      "id": 4,
+      "link_type": "fixed",
+      "link_value": 100
+    },
+   {
+      "id": 18,
+      "link_type": "percent",
+      "link_value": -10
+    },
+   {
+      "id": 460,
+      "link_type": "percent",
+      "link_value": 15
+    }
+]
 
 const rps = [
     {
@@ -414,14 +432,14 @@ const rps = [
     }
 ]
 
-let rpsMapAux = new Map()
-rps.map(rp => {rpsMapAux.set(rp.id, rp.shortDesc)})  
-var rpsMap = rpsMapAux
 
 
 const uid = () => Math.random().toString(34).slice(2);
 
 
+/**
+ * Main reducer that handles the list of room prices
+ */
 export const roomprices = (roomprices=rps, action) => {  
   console.log('Reducers',action)
   switch(action.type) { 
@@ -435,10 +453,11 @@ export const roomprices = (roomprices=rps, action) => {
         }
       }))
       
-    case NEWLINK:            
-      return cloneDeep(roomprices.map(rp => {                          
-         if(rp.id == action.payload.linkedRoomPriceId) {             
-           rp.linkPriceId = action.payload.parentRoomPriceId           
+    case NEW_LINK:            
+      return cloneDeep(roomprices.map(rp => {
+         let linkedRoomPriceId = parseInt(action.payload.parentRoomPriceId)                          
+         if(rp.id === linkedRoomPriceId) {             
+           rp.linkPriceId = linkedRoomPriceId      
           return rp
         } else {
           return rp
@@ -449,8 +468,37 @@ export const roomprices = (roomprices=rps, action) => {
       return roomprices
   }
 }
+/**
+ * Main reducer that handles the list of link rules
+ */
+export const linkRules = (linkRules=lrs, action) => {  
+  return  linkRules  
+}
+
+/**
+ * Utility Map to search by room price id
+ */
+export const rpsMap = (rpsMap, action) => {  
+  if (!rpsMap){
+    //console.log('Rebuilding rpsMap')
+    let rpsMapAux = new Map()
+    rps.map(rp => {rpsMapAux.set(rp.id, rp.shortDesc)})  
+    return rpsMapAux;
+  }else{
+    //console.log('Just return rpsMap',rpsMap)
+    return rpsMap  
+  }
+  
+}
 
 
-
-export const form = formReducer
-
+export const form = formReducer.plugin({
+    newRowForm: (state, action) => { // <------ 'account' is name of form given to reduxForm()
+      switch(action.type) {
+        case NEW_LINK:
+          return undefined       // <--- blow away form data
+        default:
+          return state
+      }
+    }
+  })

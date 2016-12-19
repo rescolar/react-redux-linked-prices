@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import RoomPriceList from '../containers/RoomPriceList';
 import NewRowForm from '../containers/NewRowForm';
+import SimpleFilter from '../containers/SimpleFilter';
 
 
 
@@ -28,11 +29,15 @@ class App extends React.Component {
     return (
       <div className="container">
         <div className="row">
-          <RoomPriceList />
+          <SimpleFilter filterName="roomPriceFilter"/>
         </div>
         <div className="row">
           <NewRowForm/>
         </div>
+        <div className="row">
+          <RoomPriceList />
+        </div>
+        
       </div>
     )
   }

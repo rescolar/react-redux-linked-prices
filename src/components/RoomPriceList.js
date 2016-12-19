@@ -27,7 +27,7 @@ const RoomPriceList = ( {roomprices} ) => {
 	        <td><button className="btn btn-default" type="button">Unlink All</button></td>	       
 	      </tr>
 	      {roomprices.map(r => (
-          	<RoomPrice roomprice={r} key={r.id} />          
+          	<RoomPrice rp={r} key={r.id} />          
           ))}         
 	    </tbody>
 	  </Table>

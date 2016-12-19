@@ -1,6 +1,6 @@
 import  { connect } from 'react-redux'
 import NewRowForm from '../components/NewRowForm'
-import { newlink } from '../actions/actions';
+import { newLink } from '../actions/actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-  	newlink: form => dispatch(newlink(form))  
+  	newLink: form => dispatch(newLink(form))    	
   }
 }
 

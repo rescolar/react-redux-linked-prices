@@ -1,16 +1,18 @@
 import  { connect } from 'react-redux'
 import RoomPrice from '../components/RoomPrice'
-import { unlink } from '../actions/actions';
+import { unLink } from '../actions/actions';
 
 
-const mapStateToProps = (state) => {      
+const mapStateToProps = ( {rpsMap, linkRules} ) => {        
   return { 
+  	rpsMap,
+  	linkRules
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-  	unlink: id => dispatch(unlink(id))
+  	unlink: id => dispatch(unLink(id))
   }
 }
 
