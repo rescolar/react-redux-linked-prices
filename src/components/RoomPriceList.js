@@ -8,23 +8,25 @@ const RoomPriceList = ( {roomprices} ) => {
 		<Table striped bordered condensed hover>
 	    <thead>
 	      <tr>
+	        <th>Unlink</th>
 	        <th>#</th>
 	        <th>Room Package</th>
 	        <th colSpan="2">Linked To</th>
 	        <th>Rule Type</th>
 	        <th>Rule Value</th>
-	        <th>Unlink</th>
+	        
 	      </tr>
 	    </thead>
 	    <tbody>
 	    <tr>
+	        <td><button className="btn btn-default" type="checkbox">Unlink All</button></td>	       
 	        <td></td>
 	        <td></td>
 	        <td></td>
 	        <td></td>
 	        <td></td>
 	        <td></td>
-	        <td><button className="btn btn-default" type="button">Unlink All</button></td>	       
+	        
 	      </tr>
 	      {roomprices.map(r => (
           	<RoomPrice rp={r} key={r.id} />          

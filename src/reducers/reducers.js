@@ -21,6 +21,8 @@ const lrs = [
     }
 ]
 
+
+
 const rps = [
     {
         "allowCancellation": true,
@@ -441,7 +443,6 @@ const uid = () => Math.random().toString(34).slice(2);
  * Main reducer that handles the list of room prices
  */
 export const roomprices = (roomprices=rps, action) => {  
-  console.log('Reducers',action)
   switch(action.type) { 
     case UNLINK:                          
       return cloneDeep(roomprices.map(rp => {
@@ -455,9 +456,12 @@ export const roomprices = (roomprices=rps, action) => {
       
     case NEW_LINK:            
       return cloneDeep(roomprices.map(rp => {
-         let linkedRoomPriceId = parseInt(action.payload.parentRoomPriceId)                          
+         let linkedRoomPriceId = parseInt(action.payload.linkedRoomPriceId) 
+         let parentRoomPriceId = parseInt(action.payload.parentRoomPriceId)                          
+         let linkRuleId = parseInt(action.payload.ruleId)                          
          if(rp.id === linkedRoomPriceId) {             
-           rp.linkPriceId = linkedRoomPriceId      
+           rp.linkPriceId = parentRoomPriceId 
+           rp.linkRuleId = linkRuleId
           return rp
         } else {
           return rp
@@ -472,7 +476,19 @@ export const roomprices = (roomprices=rps, action) => {
  * Main reducer that handles the list of link rules
  */
 export const linkRules = (linkRules=lrs, action) => {  
-  return  linkRules  
+  switch(action.type) {     
+    case NEW_LINK:   
+      var linkRule = {
+          id: action.payload.ruleId,
+          link_type: action.payload.ruleType,
+          link_value: action.payload.ruleValue
+        }
+        linkRules = [ ...linkRules, linkRule ]         
+      return linkRules
+
+    default:
+      return linkRules
+  }
 }
 
 /**

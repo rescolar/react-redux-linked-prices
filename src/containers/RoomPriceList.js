@@ -2,8 +2,7 @@ import  { connect } from 'react-redux'
 import RoomPriceList from '../components/RoomPriceList'
 
 const mapStateToProps = (state) => {  
-  let roomprices = state.roomprices  
-  console.log('RoomPriceList',state)
+  let roomprices = state.roomprices    
   // Filter using the simple filter by room price name
   if(state.form && state.form.simpleFilter && state.form.simpleFilter.values && state.form.simpleFilter.values.filterText && state.form.simpleFilter.values.filterText.length>3) {						
 		roomprices = roomprices.filter(value => {			
