@@ -9,7 +9,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-  	newLink: form => dispatch(newLink(form))    	
+  	newLink: form => dispatch(newLink(form))     	    	
   }
 }
 

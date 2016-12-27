@@ -1,48 +1,19 @@
-import React from 'react'
 import { connect } from 'react-redux'
-import RoomPriceList from '../containers/RoomPriceList';
-import NewRowForm from '../containers/NewRowForm';
-import SimpleFilter from '../containers/SimpleFilter';
+import App from '../components/App'
+import {loadRoomPrices} from '../actions/actions';
 
-
-
-
-// transform the current Redux store state into the props
 const mapStateToProps = (state) => {
-  return {
+  let guideId = window.guideId || 102
+  let hotelId = window.hotelId || 67
+  return{
+  	guideId,
+  	hotelId
   }
 }
 
-// return callback props to inject into the presentational component
-const mapDispatchToProps = (dispatch) => {
-  return {       
-  }
-}
-
-
-class App extends React.Component {
-
-  componentDidMount() {
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <div className="row">
-          <SimpleFilter filterName="roomPriceFilter"/>
-        </div>
-        <div className="row">
-          <NewRowForm/>
-        </div>
-        <div className="row">
-          <RoomPriceList />
-        </div>
-        
-      </div>
-    )
-  }
-
-}
+const mapDispatchToProps = (dispatch) => ({	
+	loadRoomPrices : (guideId, hotelId) => dispatch(loadRoomPrices(102, 67))
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
 

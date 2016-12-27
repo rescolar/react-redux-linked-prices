@@ -1,11 +1,9 @@
 import  { connect } from 'react-redux'
 import RoomPriceList from '../components/RoomPriceList'
 
-const mapStateToProps = (state) => {  
-  let roomprices = state.roomprices  
-  console.log('RoomPriceList',state)
+const mapStateToProps = ({roomprices, form}) => {    
   // Filter using the simple filter by room price name
-  if(state.form && state.form.simpleFilter && state.form.simpleFilter.values && state.form.simpleFilter.values.filterText && state.form.simpleFilter.values.filterText.length>3) {						
+  if(form && form.simpleFilter && form.simpleFilter.values && form.simpleFilter.values.filterText && form.simpleFilter.values.filterText.length>3) {						
 		roomprices = roomprices.filter(value => {			
   			if(value.shortDesc) {
       			return value.shortDesc.indexOf(state.form.simpleFilter.values.filterText) >= 0;
@@ -19,7 +17,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {
+  return {  	 
   }
 }
 

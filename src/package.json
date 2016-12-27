@@ -1,43 +1,60 @@
 {
-  "name": "basic1",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "bundle": "jspm bundle-sfx app/main.js new.jspm.js",
+    "envify": "export NODE_ENV=production && envify new.jspm.js > new.js",
+    "envify-dev": "export NODE_ENV=development && envify new.jspm.js > new.js",
+    "minify": "uglifyjs new.js -m -o new.min.js --source-map new.min.js.map",
+    "build": "yarn run bundle && yarn run envify && yarn run minify && rm new.jspm.js* new.js",
+    "build-dev": "yarn run bundle && yarn run envify-dev && yarn run minify && rm new.jspm.js* new.js",
+    "start": "yarn run watch & yarn run serve",
+    "serve": "browser-sync start --server --startPath '?hotel_id=67&guide_id=102'",
+    "watch": "chokidar-socket-emitter",
+    "lint": "eslint ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "name": "new",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
   "devDependencies": {
+    "browser-sync": "^2.18.5",
+    "chokidar-socket-emitter": "^0.5.4",
+    "envify": "^4.0.0",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "2.2.3",
+    "eslint-plugin-react": "^6.8.0",
     "jspm": "^0.16.48",
-    "jspm-git": "^0.6.0"
+    "jspm-git": "^0.6.0",
+    "uglify-js": "^2.7.5"
   },
   "jspm": {
     "dependencies": {
+      "ba-common-interface-js": "ba-git:ba-common-interface-js@1.0.5",
+      "css": "github:systemjs/plugin-css@^0.1.32",
+      "debug": "npm:debug@2.2.0",
       "es6-promise": "npm:es6-promise@^4.0.5",
-      "immutable": "npm:immutable@^3.8.1",
       "lodash": "npm:lodash@^4.17.2",
-      "normalizr": "npm:normalizr@^2.2.1",
       "object-assign": "npm:object-assign@^4.1.0",
-      "react": "npm:react@^15.4.0",
+      "react": "npm:react@^15.4.1",
       "react-bootstrap": "npm:react-bootstrap@^0.30.7",
-      "react-dom": "npm:react-dom@^15.4.0",
-      "react-redux": "npm:react-redux@^4.4.6",
+      "react-dom": "npm:react-dom@^15.4.1",
+      "react-redux": "npm:react-redux@^5.0.1",
       "react-router": "npm:react-router@^3.0.0",
       "react-router-redux": "npm:react-router-redux@^4.0.7",
       "redux": "npm:redux@^3.6.0",
-      "redux-batched-actions": "npm:redux-batched-actions@^0.1.4",
-      "redux-form": "npm:redux-form@^6.2.0",
+      "redux-batched-actions": "npm:redux-batched-actions@^0.1.5",
+      "redux-form": "npm:redux-form@^6.3.2",
       "redux-logger": "npm:redux-logger@^2.7.4",
       "redux-thunk": "npm:redux-thunk@^2.1.0",
-      "reselect": "npm:reselect@^2.5.4",
+      "socketio/socket.io-client": "github:socketio/socket.io-client@1.5.1",
       "whatwg-fetch": "npm:whatwg-fetch@^2.0.1"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.8.24",
       "babel-runtime": "npm:babel-runtime@^5.8.24",
-      "core-js": "npm:core-js@^1.1.4"
+      "core-js": "npm:core-js@^1.1.4",
+      "systemjs-hot-reloader": "github:capaj/systemjs-hot-reloader@^0.6.0"
     }
   }
 }

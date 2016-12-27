@@ -6,14 +6,16 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import App from '../containers/App'
 import configureStore from '../store/configure-store'
-import reducer from '../reducers/reducers';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router'
+import { syncHistoryWithStore} from 'react-router-redux'
 
-const store = configureStore(reducer)
+const store = configureStore()
+const history = syncHistoryWithStore(hashHistory, store)
 
 render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById('react-redux-linked-prices-jon'),
 )
 
