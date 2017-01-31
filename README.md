@@ -41,6 +41,7 @@ jspm install npm:lodash
 
 jspm install npm:react-bootstrap
 
+jspm install ba-git:ba-common-interface-js@1.0.8
 
 
 ``
